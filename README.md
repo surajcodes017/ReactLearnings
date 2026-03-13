@@ -1,2 +1,2 @@
 # ReactLearnings
-A code repo for learnings React basics
+A code repo for learning React basics
