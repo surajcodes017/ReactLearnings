@@ -1,0 +1,32 @@
+{
+  "name": "reactlearnings",
+  "version": "1.0.0",
+  "description": "This is react basic learning ",
+  "homepage": "https://github.com/surajcodes017/ReactLearnings#readme",
+  "bugs": {
+    "url": "https://github.com/surajcodes017/ReactLearnings/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/surajcodes017/ReactLearnings.git"
+  },
+  "license": "ISC",
+  "author": "Akshay Saini",
+  "type": "commonjs",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "parcel": "^2.16.4"
+  },
+  "dependencies": {
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "react-router-dom": "^6.30.3"
+  },
+  "browserslist": [
+    "last 2 Chrome version"
+  ]
+}
