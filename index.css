@@ -83,3 +83,10 @@
 .nav-items ul li a:hover{
     color: #fc8019;
 }
+
+.User-card{
+    border: 2px solid black;
+}
+.cnt-btn{
+    cursor:pointer;
+}

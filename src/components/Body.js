@@ -1,48 +1,24 @@
 import { resList } from "../utils/mockData";
 import RestaurentCard from "./RestaurentCard";
-import {useState,useEffect} from "react";
 import Shimmer from "./Shimmer"
+import {useState} from "react"
+import useRestaurentCard from "../utils/useRestaurentCard";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 
 
 const Body = () => {
-    const [listofRestaurents,setListofRestaurent] = useState([]);
+
     const [searchText,setsearchText] = useState("");
-    const [filteredRestaurants,setFilteredRestaurants] = useState([])
-    // console.log("rerendering bhai")
-    // console.log(listofRestaurents)
-    useEffect(() =>{
-        fetchData();
-    },[]) 
+   
+     const {
+        listofRestaurents,
+        filteredRestaurants,
+        setFilteredRestaurants,
+    } = useRestaurentCard();
 
-    // const fetchData = async() =>{
-    //     const data = await fetch(
-    //         "https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.4873694&lng=78.3934657&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-    //     );
-    //     const json=await data.json();
-
-    //     setListofRestaurent(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
-    // }
-    const fetchData = async () => {
-
-    const data = await fetch(
-        "https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.4873694&lng=78.3934657&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-    );
-
-    const json = await data.json();
-
-    const restaurantsCard = json?.data?.cards?.find(
-        (card) =>
-            card?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
-
-    const restaurants =
-        restaurantsCard?.card?.card?.gridElements?.infoWithStyle?.restaurants;
-
-    setListofRestaurent(restaurants);
-    setFilteredRestaurants(restaurants);
-};
-
+    const onlineStatus = useOnlineStatus();
+    if(onlineStatus === false) return <h1>Looks like you're offline!!🤔 Please check your internet connection</h1>    
     
 
     return (listofRestaurents.length === 0)?(<Shimmer />): (
@@ -65,7 +41,7 @@ const Body = () => {
                     const filteredList = listofRestaurents.filter(
                          (res)=> res.info.avgRating > 4
                     );
-                     setListofRestaurent(filteredList);
+                     setFilteredRestaurants(filteredList);
                 }}
                
                 >Top Rated Restaurents</button>
