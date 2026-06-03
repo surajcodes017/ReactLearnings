@@ -8,7 +8,11 @@ import Contact from "./components/Contact"
 import Error from "./components/Error";
 import Cart from "./components/Cart"
 import RestaurentMenu from "./components/RestaurentMenu"
-// import Grocery from "./components/Grocery";
+import {useState,useEffect} from "react";
+import userContext from "./utils/userContext";
+import { Provider } from "react-redux"
+import appStore from "./utils/appStore";
+
 
 const Grocery = lazy(()=> import("./components/Grocery"));
 const About = lazy(() => import("./components/About"))
@@ -18,11 +22,31 @@ const About = lazy(() => import("./components/About"))
 
 
 const AppLayout = () => {
+
+    const [userName,setUserName] = useState();
+    useEffect(() =>{
+        const data= {
+            name: "Duppally suraj",
+        }
+        setUserName(data.name);
+    },[])
+
         return (
-            <div className="app">
+            <Provider store={appStore}>
+                <userContext.Provider value={
+                {
+                    loggedInUser:userName,
+                    setUserName,
+                }
+            }>     
+             <div className="app">
                 <Header></Header>
                 <Outlet />
             </div>
+            </userContext.Provider>
+            </Provider>
+            
+           
         )
 }
 
